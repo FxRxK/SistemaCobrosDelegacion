@@ -20,7 +20,7 @@ import javax.swing.table.DefaultTableModel;
  *
  * @author adalberto
  */
-public class persona extends javax.swing.JFrame {
+public class contrib extends javax.swing.JFrame {
 
     /**
      * Creates new form persona
@@ -55,42 +55,42 @@ public class persona extends javax.swing.JFrame {
     private void limpiarCajas()
     {
         //txtId.setText(null); TextId no esta en uso
-        txtFolio.setText(null);
-        txtNombre.setText(null);
-        txtDomicilio.setText(null);
-        txtTelefono.setText(null);
-        txtEmail.setText(null);
-        txtFecha.setText(null);
+        txtObra.setText(null);
+        txtAbril.setText(null);
+        txtJulio.setText(null);
+        txtAgosto.setText(null);
+        txtSeptiembre.setText(null);
+        txtFaena.setText(null);
+        txtReuniones.setText(null);
+        txtObservaciones.setText(null);
     }
     
-    public persona()  {
+    public contrib()  {
         //Esto es el constructor de la clase.
         initComponents();
-        txtFolio.setVisible(true);
+        
         // Codigo que muestra info de usuarios con JTable
         Connection con = null;
         try{
             DefaultTableModel model = new DefaultTableModel();
-            jTableUsers.setModel(model);
+            jTableContrib.setModel(model);
             PreparedStatement ps = null;
             ResultSet rs = null;
             con = getConection();
             
-            String sql = "Select folio, nombre, domicilio, telefono FROM usuarios";
+            String sql = "Select obra, abril, julio, agosto, septiembre, faena, reuniones, total, observaciones FROM Contribuciones";
             ps = con.prepareStatement(sql);
             rs = ps.executeQuery();
             
             ResultSetMetaData rsMd = rs.getMetaData();
             int cantidadColumnas = rsMd .getColumnCount();
-                model.addColumn("folio");
-                model.addColumn("nombre");
-                model.addColumn("domicilio");
-                model.addColumn("telefono");
-                
-            int [] anchos = {40,160,200,100};
-            for (int x = 0; x < cantidadColumnas; x++)
-            {
-                jTableUsers.getColumnModel().getColumn(x).setPreferredWidth(anchos[x]); 
+                for (int i = 1; i <= cantidadColumnas; i++) {
+                model.addColumn(rsMd.getColumnName(i));
+            }
+            
+                int[] anchos = {80, 80, 80, 80, 80, 120, 120, 80, 200}; // Anchos de las columnas
+            for (int x = 0; x < cantidadColumnas; x++) {
+                jTableContrib.getColumnModel().getColumn(x).setPreferredWidth(anchos[x]);
             }
             
             while(rs.next()){
@@ -98,9 +98,7 @@ public class persona extends javax.swing.JFrame {
                 for(int i = 0; i< cantidadColumnas; i++)
                 {
                     filas[i] = rs.getObject(i+1);
-                    
                 }
-                
                 model.addRow(filas);
             }
             
@@ -124,60 +122,62 @@ public class persona extends javax.swing.JFrame {
         jLabel4 = new javax.swing.JLabel();
         jLabel5 = new javax.swing.JLabel();
         jLabel6 = new javax.swing.JLabel();
-        txtFecha = new javax.swing.JTextField();
-        txtDomicilio = new javax.swing.JTextField();
-        txtTelefono = new javax.swing.JTextField();
-        txtEmail = new javax.swing.JTextField();
-        txtNombre = new javax.swing.JTextField();
+        txtFaena = new javax.swing.JTextField();
+        txtJulio = new javax.swing.JTextField();
+        txtAgosto = new javax.swing.JTextField();
+        txtSeptiembre = new javax.swing.JTextField();
+        txtAbril = new javax.swing.JTextField();
         btnGuarda = new javax.swing.JButton();
         btnModifica = new javax.swing.JButton();
         btnElimina = new javax.swing.JButton();
         btnLimpia = new javax.swing.JButton();
         btnBuscar = new javax.swing.JButton();
-        txtFolio = new javax.swing.JTextField();
+        txtObra = new javax.swing.JTextField();
         jLabel8 = new javax.swing.JLabel();
-        cbxGen = new javax.swing.JComboBox<>();
-        jLabel7 = new javax.swing.JLabel();
         jPanel1 = new javax.swing.JPanel();
         jLabel9 = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
-        jTableUsers = new javax.swing.JTable();
+        jTableContrib = new javax.swing.JTable();
         jButton2 = new javax.swing.JButton();
         jTextField1 = new javax.swing.JTextField();
         jButton3 = new javax.swing.JButton();
         jLabel11 = new javax.swing.JLabel();
         jButton1 = new javax.swing.JButton();
         jButton4 = new javax.swing.JButton();
+        jLabel10 = new javax.swing.JLabel();
+        txtReuniones = new javax.swing.JTextField();
+        jLabel12 = new javax.swing.JLabel();
+        txtObservaciones = new javax.swing.JTextField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(47, 106, 255));
 
         jLabel1.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel1.setText("Registrar a un usuario");
+        jLabel1.setText("Editar contribución");
 
         jLabel2.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel2.setText("Nombre");
+        jLabel2.setText("Obra");
 
         jLabel3.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel3.setText("Domicilio");
+        jLabel3.setText("Abril");
 
         jLabel4.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel4.setText("Télefono");
+        jLabel4.setText("Julio");
 
         jLabel5.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel5.setText("Correo");
+        jLabel5.setText("Agosto");
 
         jLabel6.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel6.setText("Fecha de nacimiento");
+        jLabel6.setText("Septiembre");
 
-        txtEmail.addActionListener(new java.awt.event.ActionListener() {
+        txtSeptiembre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                txtEmailActionPerformed(evt);
+                txtSeptiembreActionPerformed(evt);
             }
         });
 
         btnGuarda.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        btnGuarda.setText("Registro");
+        btnGuarda.setText("Guarda");
         btnGuarda.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardaActionPerformed(evt);
@@ -208,7 +208,6 @@ public class persona extends javax.swing.JFrame {
             }
         });
 
-        btnBuscar.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         btnBuscar.setText("Buscar");
         btnBuscar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -217,13 +216,7 @@ public class persona extends javax.swing.JFrame {
         });
 
         jLabel8.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel8.setText("Género");
-
-        cbxGen.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        cbxGen.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "Masculino", "Femenino", " " }));
-
-        jLabel7.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
-        jLabel7.setText("Folio");
+        jLabel8.setText("Faena");
 
         jPanel1.setBackground(new java.awt.Color(153, 137, 235));
         jPanel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -231,26 +224,26 @@ public class persona extends javax.swing.JFrame {
         jLabel9.setFont(new java.awt.Font("Noto Sans", 0, 18)); // NOI18N
         jLabel9.setText("Buscar usuario: ");
 
-        jTableUsers.setModel(new javax.swing.table.DefaultTableModel(
+        jTableContrib.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null},
-                {null, null, null, null}
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null},
+                {null, null, null, null, null, null, null, null, null, null}
             },
             new String [] {
-                "Folio", "Nombre", "Domicilio", "Teléfono"
+                "Folio", "Obra", "Abril", "Julio", "Agosto", "Septiembre", "Faena", "Reuniones", "Observaciones", "Total"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true, true, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane1.setViewportView(jTableUsers);
+        jScrollPane1.setViewportView(jTableContrib);
 
         jButton2.setFont(new java.awt.Font("Noto Sans", 0, 14)); // NOI18N
         jButton2.setText("Actualizar tabla");
@@ -267,23 +260,22 @@ public class persona extends javax.swing.JFrame {
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(69, 69, 69)
-                        .addComponent(jLabel9)
-                        .addGap(28, 28, 28)
-                        .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jButton3))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(61, 61, 61)
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(64, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton2)
                 .addGap(156, 156, 156))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(69, 69, 69)
+                .addComponent(jLabel9)
+                .addGap(28, 28, 28)
+                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
+                .addComponent(jButton3)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 565, Short.MAX_VALUE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -301,7 +293,7 @@ public class persona extends javax.swing.JFrame {
         );
 
         jLabel11.setFont(new java.awt.Font("Liberation Sans", 1, 24)); // NOI18N
-        jLabel11.setText("Visualización de usuarios");
+        jLabel11.setText("Contribuciones ");
 
         jButton1.setText("Cerrar sesión");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -310,63 +302,69 @@ public class persona extends javax.swing.JFrame {
             }
         });
 
-        jButton4.setText("Insertar contribución");
-        jButton4.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton4ActionPerformed(evt);
-            }
-        });
+        jButton4.setText(".");
+
+        jLabel10.setText("Reuniones");
+
+        jLabel12.setText("Observaciones");
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
+                        .addGap(49, 49, 49)
+                        .addComponent(jLabel1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnBuscar))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(13, 13, 13)
                         .addComponent(btnGuarda)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(btnModifica)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnElimina))
+                        .addComponent(btnElimina)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jButton4)
+                        .addGap(14, 14, 14))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(38, 38, 38)
+                        .addContainerGap()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3)
+                                    .addComponent(jLabel2)
+                                    .addComponent(jLabel4))
+                                .addGap(82, 82, 82))
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel6)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addComponent(jLabel8)
+                                        .addGap(23, 23, 23)))
+                                .addGap(50, 50, 50))
                             .addGroup(layout.createSequentialGroup()
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(jLabel6)
-                                    .addComponent(jLabel8))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(cbxGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton4)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(jLabel5)
-                                        .addComponent(jLabel7)
-                                        .addComponent(jLabel3)
-                                        .addComponent(jLabel4))
-                                    .addGap(80, 80, 80)
-                                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                        .addComponent(txtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                        .addGroup(layout.createSequentialGroup()
-                                            .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, 103, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                            .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                            .addComponent(btnBuscar)
-                                            .addGap(12, 12, 12)
-                                            .addComponent(btnLimpia, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE))
-                                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                            .addComponent(txtNombre)
-                                            .addComponent(txtEmail)
-                                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, 157, javax.swing.GroupLayout.PREFERRED_SIZE)))))))
-                    .addGroup(layout.createSequentialGroup()
-                        .addGap(49, 49, 49)
-                        .addComponent(jLabel1)))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 24, Short.MAX_VALUE)
+                                    .addGroup(layout.createSequentialGroup()
+                                        .addGap(11, 11, 11)
+                                        .addComponent(jLabel5))
+                                    .addComponent(jLabel10)
+                                    .addComponent(jLabel12))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                            .addComponent(txtObservaciones)
+                            .addComponent(txtFaena, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtSeptiembre, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAgosto, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtJulio, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtAbril, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtObra, javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(txtReuniones, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGap(51, 51, 51)
+                        .addComponent(btnLimpia, javax.swing.GroupLayout.PREFERRED_SIZE, 100, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 106, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel11)
@@ -390,37 +388,46 @@ public class persona extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addContainerGap(39, Short.MAX_VALUE))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jLabel1)
-                        .addGap(56, 56, 56)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(txtFolio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7)
-                            .addComponent(btnBuscar)
-                            .addComponent(btnLimpia))
-                        .addGap(22, 22, 22)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel2)
-                            .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(27, 27, 27)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel3)
-                            .addComponent(txtDomicilio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(24, 24, 24)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel4)
-                            .addComponent(txtTelefono, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(25, 25, 25)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel5)
-                            .addComponent(txtEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(30, 30, 30)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel6)
-                            .addComponent(txtFecha, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(31, 31, 31)
-                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel8)
-                            .addComponent(cbxGen, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel1)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(20, 20, 20)
+                                .addComponent(btnBuscar)))
+                        .addGap(40, 40, 40)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btnLimpia)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtObra, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(22, 22, 22)
+                                .addComponent(txtAbril, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(27, 27, 27)
+                                .addComponent(txtJulio, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(24, 24, 24)
+                                .addComponent(txtAgosto, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25)
+                                .addComponent(txtSeptiembre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(28, 28, 28)
+                                .addComponent(txtFaena, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25)
+                                .addComponent(txtReuniones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(25, 25, 25)
+                                .addComponent(txtObservaciones, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel2)
+                                .addGap(24, 24, 24)
+                                .addComponent(jLabel3)
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabel4)
+                                .addGap(28, 28, 28)
+                                .addComponent(jLabel5)
+                                .addGap(29, 29, 29)
+                                .addComponent(jLabel6)
+                                .addGap(32, 32, 32)
+                                .addComponent(jLabel8)
+                                .addGap(30, 30, 30)
+                                .addComponent(jLabel10)
+                                .addGap(31, 31, 31)
+                                .addComponent(jLabel12)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(btnGuarda)
@@ -433,9 +440,60 @@ public class persona extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txtEmailActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtEmailActionPerformed
+    private void txtSeptiembreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtSeptiembreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_txtEmailActionPerformed
+    }//GEN-LAST:event_txtSeptiembreActionPerformed
+
+    private void btnGuardaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardaActionPerformed
+        //Clase que guarda datos en CRUD
+        Connection con = null;
+        
+        try {
+        con = getConection();
+        ps = con.prepareStatement("INSERT INTO Contribuciones (cantidad_1, cantidad_2, cantidad_3, cantidad_4, cantidad_5, faena, reuniones, observaciones) VALUES (?,?,?,?,?,?,?,?)");
+
+        ps.setString(1, txtObra.getText());
+        ps.setString(2, txtAbril.getText());
+        ps.setString(3, txtJulio.getText());
+        ps.setString(4, txtAgosto.getText());
+        ps.setString(5, txtSeptiembre.getText());
+        ps.setString(6, txtFaena.getText());
+        ps.setString(7, txtReuniones.getText());
+        ps.setString(8, txtObservaciones.getText());
+
+        int resContrib = ps.executeUpdate();
+
+        if (resContrib > 0) {
+        ResultSet generatedKeys = ps.getGeneratedKeys();
+        if (generatedKeys.next()) {
+            int idContribucion = generatedKeys.getInt(1);
+
+            // Insertar la asociación en la tabla 'inteUC' con el ID autoincrementable de la contribución
+            PreparedStatement psInteUC = con.prepareStatement("INSERT INTO inteUC (id_contribucion) VALUES (?)");
+            psInteUC.setInt(1, idContribucion);
+
+            int resInteUC = psInteUC.executeUpdate();
+
+            if (resInteUC > 0) {
+                JOptionPane.showMessageDialog(null, "Relación inteUC guardada");
+                limpiarCajas();
+            } else {
+                JOptionPane.showMessageDialog(null, "Error al guardar relación inteUC");
+            }
+        } else {
+            JOptionPane.showMessageDialog(null, "Error al obtener el ID de la contribución");
+        }
+    } else {
+            JOptionPane.showMessageDialog(null, "Error al guardar datos de ciudadano");
+        }
+
+        con.close();
+
+    } catch (SQLException e) {
+        JOptionPane.showMessageDialog(null, e);
+        limpiarCajas();
+    }
+    }//GEN-LAST:event_btnGuardaActionPerformed
 
     private void btnModificaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificaActionPerformed
         //Código de botón que Modifica datos en CRUD
@@ -446,14 +504,14 @@ public class persona extends javax.swing.JFrame {
          con = getConection();
          ps = con.prepareStatement("UPDATE usuarios SET folio=?, nombre=?, domicilio=?, telefono=?, correo_electronico=?, fecha_nacimiento=?, genero=? WHERE folio=?");
          //ps.setRowId(1, RowId.valueOf(txtId.getText()));
-         ps.setString(1, txtFolio.getText());
-         ps.setString(2, txtNombre.getText());
-         ps.setString(3, txtDomicilio.getText());
-         ps.setString(4, txtTelefono.getText());
-         ps.setString(5, txtEmail.getText());
-         ps.setDate(6,Date.valueOf(txtFecha.getText()));
-         ps.setString(7, cbxGen.getSelectedItem().toString());
-         ps.setString(8, txtFolio.getText());
+         ps.setString(1, txtObra.getText());
+         ps.setString(2, txtAbril.getText());
+         ps.setString(3, txtJulio.getText());
+         ps.setString(4, txtAgosto.getText());
+         ps.setString(5, txtSeptiembre.getText());
+         ps.setDate(6,Date.valueOf(txtFaena.getText()));
+         //ps.setString(7, cbxGen.getSelectedItem().toString());
+         ps.setString(8, txtObra.getText());
          
          int res= ps.executeUpdate();
          
@@ -486,17 +544,17 @@ public class persona extends javax.swing.JFrame {
             
          con = getConection();
          ps = con.prepareStatement("SELECT * FROM usuarios WHERE folio = ?" );
-         ps.setString(1, txtFolio.getText());
+         ps.setString(1, txtObra.getText());
          rs = ps.executeQuery();
          
          if(rs.next()){
-             txtFolio.setText(rs.getString("folio"));
-            txtNombre.setText(rs.getString("nombre"));
-            txtDomicilio.setText(rs.getString("domicilio"));
-            txtTelefono.setText(rs.getString("telefono"));
-            txtEmail.setText(rs.getString("correo_electronico"));         
-            txtFecha.setText(rs.getString("fecha_nacimiento"));
-            cbxGen.setSelectedItem(rs.getString("genero"));
+             txtObra.setText(rs.getString("folio"));
+            txtAbril.setText(rs.getString("nombre"));
+            txtJulio.setText(rs.getString("domicilio"));
+            txtAgosto.setText(rs.getString("telefono"));
+            txtSeptiembre.setText(rs.getString("correo_electronico"));         
+            txtFaena.setText(rs.getString("fecha_nacimiento"));
+            //cbxGen.setSelectedItem(rs.getString("genero"));
             
          }else
          {
@@ -522,7 +580,7 @@ public class persona extends javax.swing.JFrame {
             
          con = getConection();
          ps = con.prepareStatement("DELETE FROM usuarios WHERE folio=?");
-         ps.setInt(1, Integer.parseInt(txtFolio.getText()));
+         ps.setInt(1, Integer.parseInt(txtObra.getText()));
          
          
          int res= ps.executeUpdate();
@@ -554,74 +612,11 @@ public class persona extends javax.swing.JFrame {
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         // TODO add your handling code here:
         
-        persona persona = new persona();
-        persona.setVisible(true);
+        contrib contrib = new contrib();
+        contrib.setVisible(true);
         
         this.dispose();
     }//GEN-LAST:event_jButton2ActionPerformed
-
-    private void btnGuardaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardaActionPerformed
-        //Clase que guarda datos en CRUD
-        Connection con = null;
-
-        try {
-            con = getConection();
-            PreparedStatement ps = con.prepareStatement("INSERT INTO usuarios (folio, nombre, domicilio, telefono, correo_electronico, fecha_nacimiento, genero) VALUES (?,?,?,?,?,?,?)");
-
-            ps.setString(1, txtFolio.getText());
-            ps.setString(2, txtNombre.getText());
-            ps.setString(3, txtDomicilio.getText());
-            ps.setString(4, txtTelefono.getText());
-            ps.setString(5, txtEmail.getText());
-            ps.setDate(6, Date.valueOf(txtFecha.getText()));
-            ps.setString(7, cbxGen.getSelectedItem().toString());
-
-            int resUsuarios = ps.executeUpdate();
-
-            if (resUsuarios > 0) {
-                JOptionPane.showMessageDialog(null, "Datos de ciudadano guardados");
-
-                // Obtener el último ID de usuario insertado
-                Statement stmt = con.createStatement();
-                ResultSet rs = stmt.executeQuery("SELECT LAST_INSERT_ID() AS last_id");
-                int idUsuario = -1;
-
-                if (rs.next()) {
-                    idUsuario = rs.getInt("last_id");
-
-                    // Insertar un registro en inteUC con el ID del usuario
-                    PreparedStatement psInteUC = con.prepareStatement("INSERT INTO inteUC (idUsuario) VALUES (?)");
-                    psInteUC.setInt(1, idUsuario);
-
-                    int resInteUC = psInteUC.executeUpdate();
-
-                    if (resInteUC > 0) {
-                        JOptionPane.showMessageDialog(null, "Relación inteUC guardada");
-                        limpiarCajas();
-                    } else {
-                        JOptionPane.showMessageDialog(null, "Error al guardar relación inteUC");
-                    }
-                } else {
-                    JOptionPane.showMessageDialog(null, "Error al obtener el ID del usuario");
-                }
-            } else {
-                JOptionPane.showMessageDialog(null, "Error al guardar datos de ciudadano");
-            }
-
-            con.close();
-
-        } catch (SQLException e) {
-            JOptionPane.showMessageDialog(null, e);
-            limpiarCajas();
-        }
-    }//GEN-LAST:event_btnGuardaActionPerformed
-
-    private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
-        // TODO add your handling code here:
-        this.dispose();
-            contrib contrib = new contrib();
-            contrib.setVisible(true);
-    }//GEN-LAST:event_jButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -640,21 +635,22 @@ public class persona extends javax.swing.JFrame {
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(persona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(contrib.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(persona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(contrib.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(persona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(contrib.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(persona.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(contrib.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
+        //</editor-fold>
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             @Override
             public void run() {
-                new persona().setVisible(true);
+                new contrib().setVisible(true);
             }
         });
     }
@@ -665,31 +661,33 @@ public class persona extends javax.swing.JFrame {
     private javax.swing.JButton btnGuarda;
     private javax.swing.JButton btnLimpia;
     private javax.swing.JButton btnModifica;
-    private javax.swing.JComboBox<String> cbxGen;
     private javax.swing.JButton jButton1;
     private javax.swing.JButton jButton2;
     private javax.swing.JButton jButton3;
     private javax.swing.JButton jButton4;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
-    private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable jTableUsers;
+    private javax.swing.JTable jTableContrib;
     private javax.swing.JTextField jTextField1;
-    private javax.swing.JTextField txtDomicilio;
-    private javax.swing.JTextField txtEmail;
-    private javax.swing.JTextField txtFecha;
-    private javax.swing.JTextField txtFolio;
-    private javax.swing.JTextField txtNombre;
-    private javax.swing.JTextField txtTelefono;
+    private javax.swing.JTextField txtAbril;
+    private javax.swing.JTextField txtAgosto;
+    private javax.swing.JTextField txtFaena;
+    private javax.swing.JTextField txtJulio;
+    private javax.swing.JTextField txtObra;
+    private javax.swing.JTextField txtObservaciones;
+    private javax.swing.JTextField txtReuniones;
+    private javax.swing.JTextField txtSeptiembre;
     // End of variables declaration//GEN-END:variables
 
     private Connection getConnection() {
