@@ -3,9 +3,9 @@ app/contrib$4.class
 app/persona$9.class
 app/inicio$1.class
 app/persona$10.class
-app/contribucion$2.class
 app/contrib.class
 app/contrib$9.class
+app/contrib$11.class
 app/inicio$3.class
 app/persona$7.class
 app/contrib$6.class
@@ -13,7 +13,6 @@ app/infodevs$2.class
 app/contrib$1.class
 app/infodevs.class
 app/persona$2.class
-app/contribucion$1.class
 app/contrib$10.class
 app/persona$3.class
 app/contrib$3.class
@@ -26,7 +25,6 @@ app/persona$8.class
 app/infodevs$1.class
 app/contrib$7.class
 app/persona$1.class
-app/contribucion.class
 app/inicio.class
 app/contrib$2.class
 app/persona.class

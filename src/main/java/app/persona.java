@@ -43,7 +43,7 @@ public class persona extends javax.swing.JFrame {
             {
                 Class.forName("com.mysql.jdbc.Driver");
                 con = (Connection) DriverManager.getConnection(URL, USERNAME, PASSWORD);
-                JOptionPane.showMessageDialog(null, "Conexión exitosa");
+                //JOptionPane.showMessageDialog(null, "Conexión exitosa");
             } catch (ClassNotFoundException e){
                 JOptionPane.showMessageDialog(null, "Error de conexión: "+e);
             }
@@ -283,7 +283,7 @@ public class persona extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addGap(0, 0, Short.MAX_VALUE)
                 .addComponent(jButton2)
-                .addGap(156, 156, 156))
+                .addGap(215, 215, 215))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,6 +310,8 @@ public class persona extends javax.swing.JFrame {
             }
         });
 
+        jButton4.setFont(new java.awt.Font("Noto Sans", 1, 12)); // NOI18N
+        jButton4.setForeground(new java.awt.Color(0, 102, 255));
         jButton4.setText("Insertar contribución");
         jButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -490,7 +492,7 @@ public class persona extends javax.swing.JFrame {
          rs = ps.executeQuery();
          
          if(rs.next()){
-             txtFolio.setText(rs.getString("folio"));
+            txtFolio.setText(rs.getString("folio"));
             txtNombre.setText(rs.getString("nombre"));
             txtDomicilio.setText(rs.getString("domicilio"));
             txtTelefono.setText(rs.getString("telefono"));

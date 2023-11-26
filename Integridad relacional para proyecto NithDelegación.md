@@ -1,5 +1,13 @@
 # Integridad relacional para proyecto NithDelegación
 
+El sistema a desarrollar necesita de los siguientes módulos:
+
+- Lógin que valida el ingreso en página de inicio
+- Módulo de registro de usuarios con visualización para mejor edición de registros
+- Módulo de registro de contribuciones con visualización para mejor edición de registros.
+
+
+
 El esquema de SQL para crear estas tablas y establecer las relaciones.
 
 La tecnología usada es MySQL con Java
@@ -18,11 +26,11 @@ CREATE TABLE `usuarios` (
 
 CREATE TABLE `Contribuciones` (
   `id` int(11) NOT NULL,
-  `cantidad_1` int(11) DEFAULT NULL,
-  `cantidad_2` int(11) DEFAULT NULL,
-  `cantidad_3` int(11) DEFAULT NULL,
-  `cantidad_4` int(11) DEFAULT NULL,
-  `cantidad_5` int(11) DEFAULT NULL,
+  `obra` int(11) DEFAULT NULL,
+  `abril` int(11) DEFAULT NULL,
+  `julio` int(11) DEFAULT NULL,
+  `agosto` int(11) DEFAULT NULL,
+  `septiembre` int(11) DEFAULT NULL,
   `total` int(11) DEFAULT NULL,
   `observaciones` varchar(255) DEFAULT NULL
 )
@@ -34,4 +42,8 @@ CREATE TABLE `inteUC` (
 )
 
 ```
+
+**Diagrama entidad relación**
+
+![Diagrama](/home/Adalberto/Escritorio/bd.png)
 
