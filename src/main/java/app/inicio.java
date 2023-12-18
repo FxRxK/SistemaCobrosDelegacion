@@ -144,7 +144,7 @@ public class inicio extends javax.swing.JFrame {
     private void btnInitActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnInitActionPerformed
         //Boton que valida la contraseña para ingresar al sistema 
         
-        String password = "Java#@#8";
+        String password = "delegacion2023";
         String passw = new String(pswfCon.getPassword());
         //pswfCon.setText(password.getString("contraseña")); 
         

@@ -1,10 +1,9 @@
-/*
+    /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
  */
 
 package com.myservice.formulariosys;
 
-import app.persona;
 import app.inicio;
 /**
  *
